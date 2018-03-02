@@ -1,19 +1,15 @@
 
 CC = gcc
-CFLAGS = -W -Wall -v -g
+CFLAGS = -W -Wall -g
+LDFLAGS = -lm
 
-all: tp1main.o tp1.o
-	$(CC) tp1main.o tp1.o -o tp1
+OBJ = tp1main.o tp1.o liste.o
 
-tp1main.o: tp1main.c tp1.c
-	$(CC) -c tp1main.c -o tp1main.o
+prog : $(OBJ)
+	$(CC) $(OBJ) $(LDFLAGS) -o prog
 
-tp1.o: tp1.c
-	$(CC) -c tp1.c -o tp1.o
+liste.o : tp1.h liste.h liste.c
+	$(CC) -c liste.c $(CFLAGS)
 
-clean:
-		rm -rf *.o
-
-mrproper: clean
-		rm -rf tp1
-
+tp1.o : liste.h tp1.h tp1.c
+	$(CC) -c tp1.c $(CFLAGS)
