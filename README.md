@@ -1,1 +1,0 @@
-# tp1_SDD_ISIMA
