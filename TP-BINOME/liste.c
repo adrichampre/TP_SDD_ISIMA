@@ -85,11 +85,12 @@ void libererElt(maillon *m)
 Liste supprPremierElt(Liste l)
 {
 	maillon *m;
-
-	m=l;
-	l=l->suiv;
-	libererElt(m);
-
+	if (l != NULL)
+	{
+		m=l;
+		l=l->suiv;
+		libererElt(m);
+	}
 	return l;
 }
 
@@ -110,8 +111,8 @@ void afficherListe(Liste l)
 	while(l!=NULL)
 	{
 		printf("|   %d\t|    %d\t  |\t    %d\t       |\n",l->u.numero, l->u.periode, l->u.coutProd);
-		l=l->suiv;
-		if(l==NULL) printf("----------------------------------------\n");	
+		if(l->suiv==NULL) printf("----------------------------------------\n");	
 		else printf("|--------------------------------------|\n");
+		l=l->suiv;
 	}
 }

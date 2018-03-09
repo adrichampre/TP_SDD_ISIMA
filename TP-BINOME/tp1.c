@@ -120,28 +120,32 @@ void libererMatrice(int ** mat, int m)
 }
 
 
-Liste supprUsine(Liste l, int u, int m)
+Liste supprUsine(Liste l, int u)
 {
 	maillon * a;
-	int i;
-
-	a=l;
-
-	if(u == 0)
-	{
-		l = supprPremierElt(l);
-	}
-	else
-	{
-		for (i = 0; i < u; ++i)
+	
+		while(l!=NULL && l->u.numero == u)
 		{
-			a = a->suiv;
+			l = supprPremierElt(l);
 		}
-		a = supprElt(a, a->suiv);
-	}
 
+		if(l != NULL)
+		{
+			a=l;
+			while(a->suiv!=NULL)
+			{
+				if(a->suiv->u.numero == u)
+				{
+					a = supprElt(a, a->suiv);
+				}
+				else
+				{
+					a = a->suiv;
+				}
+			}
+		}
+	
 	return l;
-
 }
 
 
@@ -177,18 +181,23 @@ void global(char argv[], int *k)
 
 	if(*k==0)
 		*k = m*n;
-	printf("\n%d\n",*k);
+	printf("\nK : %d\n\n",*k);
 	printf("Matrice du fichier : \n");
 	afficherMatrice(mat,m,n);
 
 	l=convertirMatrice(mat,m,n,*k);
 	printf("Liste chaine : \n");
-	
-	//l = supprUsine(l, 0, n);
-	
-	
+
 	afficherListe(l);
+
+	l = supprUsine(l, 1);
+	
+	printf("\nAprès suppression des usines :\n\n");
+
+	afficherListe(l);
+	
 	sauvegarde("liste.txt",l);
+
 	libererMatrice(mat,m);
 	libererListe(l);
 }

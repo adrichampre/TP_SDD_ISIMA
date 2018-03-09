@@ -9,7 +9,7 @@ void libererMatrice(int **mat, int m);
 
 Liste convertirMatrice(int **mat, int m, int n, int k);
 
-Liste supprUsine(Liste l, int u, int m);
+Liste supprUsine(Liste l, int u);
 
 void sauvegarde(char *nomFichier, Liste l);
 
