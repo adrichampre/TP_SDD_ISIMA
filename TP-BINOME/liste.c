@@ -1,10 +1,10 @@
 #include "liste.h"
 
-Liste insererEnTete(Liste l, int periode, int coutProd, int numero)
+liste_t insererEnTete(liste_t l, int periode, int coutProd, int numero)
 {
-	maillon *m;
+	maillon_t * m;
 	
-	m = (maillon *)malloc(sizeof(maillon));
+	m = (maillon_t *)malloc(sizeof(maillon_t));
 	
 	if(m == NULL)
 	{
@@ -21,12 +21,12 @@ Liste insererEnTete(Liste l, int periode, int coutProd, int numero)
 	return m;
 }
 
-Liste insererEnFin(Liste l, int periode, int coutProd, int numero)
+liste_t insererEnFin(liste_t l, int periode, int coutProd, int numero)
 {
-	maillon *m,*a;
+	maillon_t * m,* a;
 
 	
-	m = (maillon *)malloc(sizeof(maillon));
+	m = (maillon_t *)malloc(sizeof(maillon_t));
 	if(m == NULL)
 	{
 		printf("Erreur : Probleme d'allocation\n");
@@ -61,14 +61,15 @@ Liste insererEnFin(Liste l, int periode, int coutProd, int numero)
 	return l;
 }
 
-Liste nouvelleListe(void)
+liste_t nouvelleListe(void)
 {
 	return NULL;
 }
 
-void libererListe(Liste l)
+void libererListe(liste_t l)
 {
-	maillon *m;
+	maillon_t * m;
+
 	while(l!=NULL)
 	{
 		m = l;
@@ -77,24 +78,29 @@ void libererListe(Liste l)
 	}
 }
 
-void libererElt(maillon *m)
+void libererElt(maillon_t * m)
 {
 	free(m);
 }
 
-Liste supprPremierElt(Liste l)
+liste_t supprPremierElt(liste_t l)
 {
-	maillon *m;
+	maillon_t * m;
+
 	if (l != NULL)
 	{
 		m=l;
 		l=l->suiv;
 		libererElt(m);
 	}
+	else
+	{
+		l = NULL;
+	}
 	return l;
 }
 
-Liste supprElt(maillon *prec, maillon *suppr)
+liste_t supprElt(maillon_t * prec, maillon_t *suppr)
 {
 	prec->suiv = suppr->suiv;
 	libererElt(suppr);
@@ -102,7 +108,7 @@ Liste supprElt(maillon *prec, maillon *suppr)
 	return prec;
 }
 
-void afficherListe(Liste l)
+void afficherListe(liste_t l)
 {	
 	printf("----------------------------------------\n");
 	printf("| Usine | periode | cout de production |\n");

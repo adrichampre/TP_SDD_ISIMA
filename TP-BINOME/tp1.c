@@ -1,11 +1,11 @@
 #include "tp1.h"
 
 
-Liste convertirMatrice(int **mat, int m, int n, int k)
+liste_t convertirMatrice(int ** mat, int m, int n, int k)
 {
 	int i;
-	Usine tab[m*n];
-	Liste l;
+	usine_t tab[m*n];
+	liste_t l;
 	l = nouvelleListe();
 	triTab(tab,mat,m,n);
 	for(i=0;i<k;i++)
@@ -15,9 +15,9 @@ Liste convertirMatrice(int **mat, int m, int n, int k)
 	return l;
 }
 
-void triTab(Usine *tab, int **mat, int m, int n) 
+void triTab(usine_t * tab, int ** mat, int m, int n) 
 { 
-	Usine tmp;
+	usine_t tmp;
 	int estTrie,cour, li,co,i, cpt=0; 
 
 	for(li=0; li<m; li++)
@@ -59,7 +59,7 @@ void triTab(Usine *tab, int **mat, int m, int n)
 
 int ** chargement(char * nomFichier, int * m, int * n)
 {
-	FILE *f;
+	FILE * f;
 	int i,j, ** mat;
 	
 	f=fopen(nomFichier,"r");
@@ -69,7 +69,7 @@ int ** chargement(char * nomFichier, int * m, int * n)
 		exit(1);
 	}
 	fscanf(f,"%d%*c %d%*c",m,n);
-	mat = (int **)malloc(*m * sizeof(int));
+	mat = (int **)malloc(* m * sizeof(int));
 	if(mat == NULL)
 	{
 		printf("Erreur : Probleme d'allocation\n");
@@ -78,13 +78,13 @@ int ** chargement(char * nomFichier, int * m, int * n)
 
 	for(i=0;i<*m;i++)
 	{
-		mat[i] = (int *)malloc(*n * sizeof(int));
+		mat[i] = (int *)malloc(* n * sizeof(int));
 		if(mat[i] == NULL)
 		{
 			printf("Erreur : Probleme d'allocation\n");
 			exit(2);
 		}
-		for(j=0;j<*n;j++)
+		for(j=0;j<* n;j++)
 		{
 			fscanf(f,"%d%*c",mat[i]+j);
 		}
@@ -120,9 +120,9 @@ void libererMatrice(int ** mat, int m)
 }
 
 
-Liste supprUsine(Liste l, int u)
+liste_t supprUsine(liste_t l, int u)
 {
-	maillon * a;
+	maillon_t * a;
 	
 		while(l!=NULL && l->u.numero == u)
 		{
@@ -149,9 +149,9 @@ Liste supprUsine(Liste l, int u)
 }
 
 
-void sauvegarde(char *nomFichier, Liste l)
+void sauvegarde(char * nomFichier, liste_t l)
 {
-	FILE *f;
+	FILE * f;
 
 	f=fopen(nomFichier,"w");
 	if(f==NULL)
@@ -175,29 +175,29 @@ void sauvegarde(char *nomFichier, Liste l)
 void global(char argv[], int *k)
 {
 	int ** mat, m, n;
-	Liste l;
+	liste_t l;
 	
 	mat = chargement(argv,&m,&n);
 
 	if(*k==0)
 		*k = m*n;
-	printf("\nK : %d\n\n",*k);
+	printf("\nK : %d\n\n",* k);
 	printf("Matrice du fichier : \n");
-	afficherMatrice(mat,m,n);
+	afficherMatrice(mat, m, n);
 
-	l=convertirMatrice(mat,m,n,*k);
-	printf("Liste chaine : \n");
+	l=convertirMatrice(mat, m, n, * k);
+	printf("liste_t chaine : \n");
 
 	afficherListe(l);
 
-	l = supprUsine(l, 1);
-	
+	l = supprUsine(l, 2);
+
 	printf("\nAprès suppression des usines :\n\n");
 
 	afficherListe(l);
 	
-	sauvegarde("liste.txt",l);
+	sauvegarde("liste_t.txt",l);
 
-	libererMatrice(mat,m);
+	libererMatrice(mat, m);
 	libererListe(l);
 }

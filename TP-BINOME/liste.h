@@ -2,26 +2,26 @@
 #include <stdlib.h>
 #include <string.h>
 
-typedef struct Usine
+typedef struct usine_t
 {
 	int periode;
 	int coutProd;
 	int numero;
-}Usine;
+}usine_t;
 
-typedef struct maillon
+typedef struct maillon_t
 {
-	Usine u;
-	struct maillon * suiv;
-}maillon, *Liste;
+	usine_t u;
+	struct maillon_t * suiv;
+}maillon_t, * liste_t;
 
 
-Liste nouvelleListe(void);
-Liste insererEnTete(Liste l, int periode, int coutProd, int numero);
-Liste insererEnFin(Liste l, int periode, int coutProd, int numero);
+liste_t nouvelleListe(void);
+liste_t insererEnTete(liste_t l, int periode, int coutProd, int numero);
+liste_t insererEnFin(liste_t l, int periode, int coutProd, int numero);
 
-void libererListe(Liste l);
-void afficherListe(Liste l);
-void libererElt(maillon *m);
-Liste supprElt(maillon *prec, maillon *suppr);
-Liste supprPremierElt(Liste l);
+void libererListe(liste_t l);
+void afficherListe(liste_t l);
+void libererElt(maillon_t * m);
+liste_t supprElt(maillon_t * prec, maillon_t *suppr);
+liste_t supprPremierElt(liste_t l);
