@@ -1,22 +1,7 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
+#include "liste.h"
 
-typedef struct Usine
-{
-	int periode;
-	int coutProd;
-	int numero;
-}Usine;
+void triTab(Usine *tab, int **mat, int m, int n); 
 
-typedef struct maillon
-{
-	Usine u;
-	struct maillon * suiv;
-}maillon, *Liste;
-
-
-void global(char argv[], int *k);
 int ** chargement(char nomFichier[], int * m, int * n);
 
 void afficherMatrice(int ** mat, int m, int n);
@@ -26,6 +11,7 @@ Liste convertirMatrice(int **mat, int m, int n, int k);
 
 Liste supprUsine(Liste l, int u, int m);
 
-void sauvegarde(char *nomFichier, Liste l, int n);
+void sauvegarde(char *nomFichier, Liste l);
 
-void triTab(Usine *tab, int **mat, int m, int n); 
+
+void global(char argv[], int *k);

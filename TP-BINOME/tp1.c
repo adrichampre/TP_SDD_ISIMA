@@ -1,17 +1,16 @@
 #include "tp1.h"
 
 
-
 Liste convertirMatrice(int **mat, int m, int n, int k)
 {
-	int i,min = 0;
+	int i;
 	Usine tab[m*n];
 	Liste l;
 	l = nouvelleListe();
 	triTab(tab,mat,m,n);
 	for(i=0;i<k;i++)
 	{
-		l = insererEnFin(l,tab[i].periode, tab[i].coutProd, tab[i].numero); // Peut aussi choisir d'inserer en fin
+		l = insererEnFin(l,tab[i].periode, tab[i].coutProd, tab[i].numero);
 	}
 	return l;
 }
@@ -58,7 +57,7 @@ void triTab(Usine *tab, int **mat, int m, int n)
 	}
 }
 
-int ** chargement(char nomFichier[], int * m, int * n)
+int ** chargement(char * nomFichier, int * m, int * n)
 {
 	FILE *f;
 	int i,j, ** mat;
@@ -109,7 +108,7 @@ void afficherMatrice(int ** mat, int m, int n)
 	printf("\n");
 }
 
-void libererMatrice(int **mat, int m)
+void libererMatrice(int ** mat, int m)
 {
 	int i;
 	
@@ -123,7 +122,7 @@ void libererMatrice(int **mat, int m)
 
 Liste supprUsine(Liste l, int u, int m)
 {
-	maillon *a;
+	maillon * a;
 	int i;
 
 	a=l;
@@ -146,10 +145,9 @@ Liste supprUsine(Liste l, int u, int m)
 }
 
 
-void sauvegarde(char *nomFichier, Liste l, int n)
+void sauvegarde(char *nomFichier, Liste l)
 {
 	FILE *f;
-	int i;
 
 	f=fopen(nomFichier,"w");
 	if(f==NULL)
@@ -158,13 +156,12 @@ void sauvegarde(char *nomFichier, Liste l, int n)
 		exit(1);
 	}
 
+	fprintf(f, "Usine\tPeriode\t\tCout de production\n");
+
 	while(l != NULL)
 	{
-		for (i = 0; i < n; ++i)
-		{
-			fprintf(f, "%d ", l->u.coutProd);
-		}
-		fprintf(f, "\n");
+
+		fprintf(f, "  %d\t\t  %d\t\t\t  %d\n", l->u.numero, l->u.periode, l->u.coutProd);
 		l = l->suiv;
 	}
 
@@ -191,7 +188,7 @@ void global(char argv[], int *k)
 	
 	
 	afficherListe(l);
-	sauvegarde("liste.txt",l,n);
+	sauvegarde("liste.txt",l);
 	libererMatrice(mat,m);
 	libererListe(l);
 }

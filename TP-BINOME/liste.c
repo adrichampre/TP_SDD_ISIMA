@@ -24,7 +24,6 @@ Liste insererEnTete(Liste l, int periode, int coutProd, int numero)
 Liste insererEnFin(Liste l, int periode, int coutProd, int numero)
 {
 	maillon *m,*a;
-	int i;
 
 	
 	m = (maillon *)malloc(sizeof(maillon));
@@ -103,10 +102,7 @@ Liste supprElt(maillon *prec, maillon *suppr)
 }
 
 void afficherListe(Liste l)
-{
-	int i;
-
-	
+{	
 	printf("----------------------------------------\n");
 	printf("| Usine | periode | cout de production |\n");
 	printf("|--------------------------------------|\n");
