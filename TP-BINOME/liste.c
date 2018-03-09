@@ -1,30 +1,27 @@
 #include "liste.h"
 
-void afficherElt(Liste l)
-{
-	printf("Usine : %d Valeur :%d ",l->usine, l->periode);
-}
-
-Liste insererEnTete(Liste l, int val, int usine)//A finir !!!!!!
+Liste insererEnTete(Liste l, int periode, int coutProd, int numero)
 {
 	maillon *m;
-	int i;
 	
 	m = (maillon *)malloc(sizeof(maillon));
+	
 	if(m == NULL)
 	{
-		printf("Probleme d'allocation\n");
+		printf("Erreur : Probleme d'allocation\n");
 		exit(2);
 	}
 
-	m->periode = val;
-	m->usine = usine;
+	m->u.periode = periode;
+	m->u.coutProd = coutProd;
+	m->u.numero = numero;
+	
 	m->suiv = l;
 
 	return m;
 }
 
-/*Liste insererEnFin(Liste l, int *periode, int n)
+Liste insererEnFin(Liste l, int periode, int coutProd, int numero)
 {
 	maillon *m,*a;
 	int i;
@@ -33,22 +30,16 @@ Liste insererEnTete(Liste l, int val, int usine)//A finir !!!!!!
 	m = (maillon *)malloc(sizeof(maillon));
 	if(m == NULL)
 	{
-		printf("Probleme d'allocation\n");
-		exit(2);
-	}
-
-	m->periode = (int *)malloc(sizeof(int)*n);
-	if(m->periode == NULL)
-	{
-		printf("Probleme d'allocation\n");
+		printf("Erreur : Probleme d'allocation\n");
 		exit(2);
 	}
 
 	m->suiv = nouvelleListe();
-	for(i=0;i<n;i++)
-	{
-		m->periode[i] = periode[i];	
-	}
+	
+
+	m->u.periode = periode;
+	m->u.coutProd = coutProd;
+	m->u.numero = numero;
 
 	if(l != NULL)
 	{
@@ -69,8 +60,7 @@ Liste insererEnTete(Liste l, int val, int usine)//A finir !!!!!!
 	}
 		
 	return l;
-}*/
-
+}
 
 Liste nouvelleListe(void)
 {
@@ -83,8 +73,8 @@ void libererListe(Liste l)
 	while(l!=NULL)
 	{
 		m = l;
-		l = l->suiv;
 		libererElt(m);
+		l = l->suiv;
 	}
 }
 
@@ -116,10 +106,16 @@ void afficherListe(Liste l)
 {
 	int i;
 
+	
+	printf("----------------------------------------\n");
+	printf("| Usine | periode | cout de production |\n");
+	printf("|--------------------------------------|\n");
+	
 	while(l!=NULL)
 	{
-		printf("%d ", l->periode);
-		printf("\n");
+		printf("|   %d\t|    %d\t  |\t    %d\t       |\n",l->u.numero, l->u.periode, l->u.coutProd);
 		l=l->suiv;
+		if(l==NULL) printf("----------------------------------------\n");	
+		else printf("|--------------------------------------|\n");
 	}
 }
