@@ -1,6 +1,21 @@
+/* -------------------------------------------------------------------- */
+/*            Fichier contenant les fonctions de liste                  */
+/*                                                                      */
+/* -------------------------------------------------------------------- */
+
 #include "liste.h"
 
-liste_t insererEnTete(liste_t l, int periode, int coutProd, int numero)
+
+/* -------------------------------------------------------------------- */
+/* InsererEnTete          Insére un maillon en tête de liste            */
+/*                                                             			*/
+/* En entrée: l est la liste chaînée où la fonction ajoute un maillon  	*/
+/*			  u représente l'usine qui sera ajouté dans le maillon 		*/
+/*																		*/
+/* En sortie: la liste chaînée l avec un maillon supplémentaire			*/
+/* -------------------------------------------------------------------- */
+
+liste_t InsererEnTete(liste_t l, usine_t u)
 {
 	maillon_t * m;
 	
@@ -12,16 +27,25 @@ liste_t insererEnTete(liste_t l, int periode, int coutProd, int numero)
 		exit(2);
 	}
 
-	m->u.periode = periode;
-	m->u.coutProd = coutProd;
-	m->u.numero = numero;
+	m->u.periode = u.periode;
+	m->u.coutProd = u.coutProd;
+	m->u.numero = u.numero;
 	
 	m->suiv = l;
 
 	return m;
 }
 
-liste_t insererEnFin(liste_t l, int periode, int coutProd, int numero)
+/* -------------------------------------------------------------------- */
+/* InsererEnFin          Insére un maillon en fin de liste 	            */
+/*                                                             			*/
+/* En entrée: l est la liste chaînée où la fonction ajoute un maillon  	*/
+/*			  u représente l'usine qui sera ajouté dans le maillon 		*/
+/*																		*/
+/* En sortie: la liste chaînée l avec un maillon supplémentaire			*/
+/* -------------------------------------------------------------------- */
+
+liste_t InsererEnFin(liste_t l, usine_t u)
 {
 	maillon_t * m,* a;
 
@@ -33,12 +57,12 @@ liste_t insererEnFin(liste_t l, int periode, int coutProd, int numero)
 		exit(2);
 	}
 
-	m->suiv = nouvelleListe();
+	m->suiv = NouvelleListe();
 	
 
-	m->u.periode = periode;
-	m->u.coutProd = coutProd;
-	m->u.numero = numero;
+	m->u.periode = u.periode;
+	m->u.coutProd = u.coutProd;
+	m->u.numero = u.numero;
 
 	if(l != NULL)
 	{
@@ -61,29 +85,61 @@ liste_t insererEnFin(liste_t l, int periode, int coutProd, int numero)
 	return l;
 }
 
-liste_t nouvelleListe(void)
+/* -------------------------------------------------------------------- */
+/* NouvelleListe          Renvoie NULL pour faire une nouvelle liste    */
+/*                                                             			*/
+/* En entrée:														    */
+/*																		*/
+/* En sortie: retourne NULL 											*/
+/* -------------------------------------------------------------------- */
+
+liste_t NouvelleListe(void)
 {
 	return NULL;
 }
 
-void libererListe(liste_t l)
+/* -------------------------------------------------------------------- */
+/* LibererListe        Libére la mémoire occupé par la liste chaînée    */
+/*                                                             			*/
+/* En entrée: l est la liste chaînée à libérer						    */
+/*																		*/
+/* En sortie:															*/
+/* -------------------------------------------------------------------- */
+
+void LibererListe(liste_t l)
 {
 	maillon_t * m;
 
 	while(l!=NULL)
 	{
 		m = l;
-		libererElt(m);
+		LibererElt(m);
 		l = l->suiv;
 	}
 }
 
-void libererElt(maillon_t * m)
+/* ------------------------------------------------------------------------------ */
+/* LibererElt        Libére la mémoire occupé d'un maillon de la liste chaînée    */
+/*                                                             					  */
+/* En entrée: m est le maillon à libérer						    		  	  */
+/*																				  */
+/* En sortie:																	  */
+/* ------------------------------------------------------------------------------ */
+
+void LibererElt(maillon_t * m)
 {
 	free(m);
 }
 
-liste_t supprPremierElt(liste_t l)
+/* -------------------------------------------------------------------- */
+/* SupprPremierElt        Supprime le premier maillon de la liste       */
+/*                                                             			*/
+/* En entrée: l est la liste chaînée						    		*/
+/*																		*/
+/* En sortie: la liste chaînée avec le premier maillon supprimé 	    */
+/* -------------------------------------------------------------------- */
+
+liste_t SupprPremierElt(liste_t l)
 {
 	maillon_t * m;
 
@@ -91,7 +147,7 @@ liste_t supprPremierElt(liste_t l)
 	{
 		m=l;
 		l=l->suiv;
-		libererElt(m);
+		LibererElt(m);
 	}
 	else
 	{
@@ -100,15 +156,32 @@ liste_t supprPremierElt(liste_t l)
 	return l;
 }
 
-liste_t supprElt(maillon_t * prec, maillon_t *suppr)
+/* ----------------------------------------------------------------------------------- */
+/* SupprElt        Supprime un élément de la liste chaînée    						   */
+/*                                                             						   */
+/* En entrée: prec est le pointeur sur le maillon précédent à celui qu'on supprimera   */
+/*			  suppr est le pointeur sur le maillon à supprimer 						   */
+/*																					   */
+/* En sortie: renvoie le pointeur prec												   */
+/* ----------------------------------------------------------------------------------- */
+
+liste_t SupprElt(maillon_t * prec, maillon_t *suppr)
 {
 	prec->suiv = suppr->suiv;
-	libererElt(suppr);
+	LibererElt(suppr);
 
 	return prec;
 }
 
-void afficherListe(liste_t l)
+/* -------------------------------------------------------------------- */
+/* AfficherListe        	  Afficher la liste chaînée			   	    */
+/*                                                             			*/
+/* En entrée: l est la liste chaînée à afficher					    	*/
+/*																		*/
+/* En sortie:															*/
+/* -------------------------------------------------------------------- */
+
+void AfficherListe(liste_t l)
 {	
 	printf("----------------------------------------\n");
 	printf("| Usine | periode | cout de production |\n");

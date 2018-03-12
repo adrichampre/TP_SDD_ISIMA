@@ -1,4 +1,19 @@
+/* -------------------------------------------------------------------- */
+/*            		Fichier avec simplement le main                 	*/
+/*                                                                      */
+/* -------------------------------------------------------------------- */
+
+
 #include "tp1.h"
+
+/* -------------------------------------------------------------------- */
+/* main          				Fonction main    						*/
+/*                                                             			*/
+/* En entrée: argc nombre d'arguments									*/
+/*			  argv tableau de chaîne de caractéres des arguments		*/
+/*																		*/
+/* En sortie: le code de retour  										*/
+/* -------------------------------------------------------------------- */
 
 
 int main(int argc, char ** argv)
@@ -15,6 +30,6 @@ int main(int argc, char ** argv)
 		k=0;
 	}
 	else k = atoi(argv[2]);
-	global(argv[1], &k);
+	Global(argv[1], &k);
 	return 0;
 }

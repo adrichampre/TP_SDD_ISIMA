@@ -1,21 +1,50 @@
+/* -------------------------------------------------------------------- */
+/*          Fichier contenant les fonctions spécifique au tp            */
+/*                                                                      */
+/* -------------------------------------------------------------------- */
+
+
 #include "tp1.h"
 
 
-liste_t convertirMatrice(int ** mat, int m, int n, int k)
+/* -------------------------------------------------------------------------------------------------------------- */
+/* ConvertirMatrice          Convertie notre matrice en liste chaînée triée (ordre croissant) avec k valeurs      */
+/*                                                             													  */
+/* En entrée: mat matrice d'entier contenant les coûts de production des usines  								  */
+/*			  m nombre d'usine																					  */
+/*			  n nombre de période																				  */
+/*			  k nombre de valeur à conserver																	  */
+/*																												  */
+/* En sortie: la liste chaînée l triée en ordre croissant													      */
+/* -------------------------------------------------------------------------------------------------------------- */
+
+liste_t ConvertirMatrice(int ** mat, int m, int n, int k)
 {
 	int i;
 	usine_t tab[m*n];
 	liste_t l;
-	l = nouvelleListe();
-	triTab(tab,mat,m,n);
+
+	l = NouvelleListe();
+	TriTab(tab,mat,m,n);
 	for(i=0;i<k;i++)
 	{
-		l = insererEnFin(l,tab[i].periode, tab[i].coutProd, tab[i].numero);
+		l = InsererEnFin(l,tab[i]);
 	}
 	return l;
 }
 
-void triTab(usine_t * tab, int ** mat, int m, int n) 
+/* ----------------------------------------------------------------------------------------------- */
+/* TriTab          Tri un tableau d'usine en ordre croissant de leur coût de production            */
+/*                                                             									   */
+/* En entrée: tab est le tableau à rendre trié 												   */
+/*			  mat matrice d'entier contenant les coûts de production des usines 				   */
+/*			  m nombre d'usine																	   */
+/*			  n nombre de période																   */
+/*																								   */
+/* En sortie: tab le tableau des usines triées													   */
+/* ----------------------------------------------------------------------------------------------- */
+
+void TriTab(usine_t * tab, int ** mat, int m, int n) 
 { 
 	usine_t tmp;
 	int estTrie,cour, li,co,i, cpt=0; 
@@ -57,7 +86,19 @@ void triTab(usine_t * tab, int ** mat, int m, int n)
 	}
 }
 
-int ** chargement(char * nomFichier, int * m, int * n)
+/* ------------------------------------------------------------------------------------------------------- */
+/* Chargement          Charge un fichier pour renvoyer une matrice des coût de production des usines       */
+/*                                                             									   		   */
+/* En entrée: nomFichier représente le nom de fichier que l'on doit charger 							   */
+/*			  m pointeur sur le nombre d'usine															   */
+/*			  n pointeur sur le nombre de période												   		   */
+/*																								   		   */
+/* En sortie: mat matrice des coûts de production des usines											   */
+/*			  m nombre d'usine 																			   */
+/*			  n nombre 																					   */
+/* ------------------------------------------------------------------------------------------------------- */
+
+int ** Chargement(char * nomFichier, int * m, int * n)
 {
 	FILE * f;
 	int i,j, ** mat;
@@ -95,7 +136,18 @@ int ** chargement(char * nomFichier, int * m, int * n)
 	
 }
 
-void afficherMatrice(int ** mat, int m, int n)
+
+/* ----------------------------------------------------------------------------------------------- */
+/* AfficherMatrice          Affiche toute la matrice de dimension m*n            				   */
+/*                                                             									   */
+/* En entrée: mat matrice d'entier contenant les coûts de production des usines 				   */
+/*			  m nombre d'usine																	   */
+/*			  n nombre de période																   */
+/*																								   */
+/* En sortie: 																					   */
+/* ----------------------------------------------------------------------------------------------- */
+
+void AfficherMatrice(int ** mat, int m, int n)
 {
 	int i,j;
 	
@@ -108,7 +160,17 @@ void afficherMatrice(int ** mat, int m, int n)
 	printf("\n");
 }
 
-void libererMatrice(int ** mat, int m)
+
+/* ----------------------------------------------------------------------------------------------- */
+/* LibererMatrice          Libére l'espace occupé par la matrice            					   */
+/*                                                             									   */
+/* En entrée: mat matrice d'entier contenant les coûts de production des usines 				   */
+/*			  m nombre d'usine																	   */
+/*																								   */
+/* En sortie: 																					   */
+/* ----------------------------------------------------------------------------------------------- */
+
+void LibererMatrice(int ** mat, int m)
 {
 	int i;
 	
@@ -119,14 +181,22 @@ void libererMatrice(int ** mat, int m)
 	free(mat);
 }
 
+/* ----------------------------------------------------------------------------------------------- */
+/* SupprUsine          Supprime de la liste chaînée tous les éléments d'une usine		           */
+/*                                                             									   */
+/* En entrée: l est la liste chaînée			 												   */
+/*			  u numéro d'usine à supprimer de la liste chaînée					 				   */
+/*																								   */
+/* En sortie: l la nouvelle liste chaînée après suppression										   */
+/* ----------------------------------------------------------------------------------------------- */
 
-liste_t supprUsine(liste_t l, int u)
+liste_t SupprUsine(liste_t l, int u)
 {
 	maillon_t * a;
 	
 		while(l!=NULL && l->u.numero == u)
 		{
-			l = supprPremierElt(l);
+			l = SupprPremierElt(l);
 		}
 
 		if(l != NULL)
@@ -136,7 +206,7 @@ liste_t supprUsine(liste_t l, int u)
 			{
 				if(a->suiv->u.numero == u)
 				{
-					a = supprElt(a, a->suiv);
+					a = SupprElt(a, a->suiv);
 				}
 				else
 				{
@@ -148,8 +218,16 @@ liste_t supprUsine(liste_t l, int u)
 	return l;
 }
 
+/* ----------------------------------------------------------------------------------------------- */
+/* Sauvegarde          Sauvegarde la liste chaînée dans un fichier 						           */
+/*                                                             									   */
+/* En entrée: nomFichier est le nom du fichier où la sauvegarde sera effectuée 				   	   */
+/*			  l liste chaînée à sauvegarder									 				   	   */
+/*																								   */
+/* En sortie: 																					   */
+/* ----------------------------------------------------------------------------------------------- */
 
-void sauvegarde(char * nomFichier, liste_t l)
+void Sauvegarde(char * nomFichier, liste_t l)
 {
 	FILE * f;
 
@@ -172,32 +250,42 @@ void sauvegarde(char * nomFichier, liste_t l)
 	fclose(f);
 }
 
-void global(char argv[], int *k)
+/* ----------------------------------------------------------------------------------------------- */
+/* Global       Fonction qui fait appel à toutes les autres fonctions nécessaire pour notre tp     */
+/*                                                             									   */
+/* En entrée: argv est le tableau de caractéres contenant les arguments						       */
+/*			  k est le pointeur d'entier sur le nombre de valeurs  				   			       */
+/*				à conserver dans la convertion de la matrice									   */
+/*																								   */
+/* En sortie: 																					   */
+/* ----------------------------------------------------------------------------------------------- */
+
+void Global(char argv[], int *k)
 {
 	int ** mat, m, n;
 	liste_t l;
 	
-	mat = chargement(argv,&m,&n);
+	mat = Chargement(argv,&m,&n);
 
 	if(*k==0)
 		*k = m*n;
 	printf("\nK : %d\n\n",* k);
 	printf("Matrice du fichier : \n");
-	afficherMatrice(mat, m, n);
+	AfficherMatrice(mat, m, n);
 
-	l=convertirMatrice(mat, m, n, * k);
-	printf("liste_t chaine : \n");
+	l=ConvertirMatrice(mat, m, n, * k);
+	printf("Liste chaînée : \n");
 
-	afficherListe(l);
+	AfficherListe(l);
 
-	l = supprUsine(l, 2);
+	l = SupprUsine(l, 2);
 
 	printf("\nAprès suppression des usines :\n\n");
 
-	afficherListe(l);
+	AfficherListe(l);
 	
-	sauvegarde("liste_t.txt",l);
+	Sauvegarde("liste.txt",l);
 
-	libererMatrice(mat, m);
-	libererListe(l);
+	LibererMatrice(mat, m);
+	LibererListe(l);
 }
