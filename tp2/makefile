@@ -1,9 +1,9 @@
 
 CC = gcc
-CFLAGS = -W -Wall -g
+CFLAGS = -W -Wall -pedantic -g
 LDFLAGS = -lm
 
-OBJ = main.o pile.o
+OBJ = main.o pile.o tp2.o file.o
 
 prog : $(OBJ)
 	$(CC) $(OBJ) $(LDFLAGS) -o prog
