@@ -1,125 +1,196 @@
+/* -------------------------------------------------------------------- */
+/*            Fichier contenant les fonctions de liste                  */
+/*                                                                      */
+/* -------------------------------------------------------------------- */
+
 #include "liste.h"
 
-void afficherElt(Liste l)
-{
-	printf("Usine : %d Valeur :%d ",l->usine, l->periode);
-}
 
-Liste insererEnTete(Liste l, int val, int usine)//A finir !!!!!!
+/* -------------------------------------------------------------------- */
+/* InsererEnTete          Insére un maillon en tête de liste            */
+/*                                                             			*/
+/* En entrée: l est la liste chaînée où la fonction ajoute un maillon  	*/
+/*			  u représente l'usine qui sera ajouté dans le maillon 		*/
+/*																		*/
+/* En sortie: la liste chaînée l avec un maillon supplémentaire			*/
+/* -------------------------------------------------------------------- */
+
+liste_t InsererEnTete(liste_t l, usine_t u)
 {
-	maillon *m;
-	int i;
+	maillon_t * m;
 	
-	m = (maillon *)malloc(sizeof(maillon));
+	m = (maillon_t *)malloc(sizeof(maillon_t));
+	
 	if(m == NULL)
 	{
-		printf("Probleme d'allocation\n");
+		printf("Erreur : Probleme d'allocation\n");
 		exit(2);
 	}
 
-	m->periode = val;
-	m->usine = usine;
+	m->u.periode = u.periode;
+	m->u.coutProd = u.coutProd;
+	m->u.numero = u.numero;
+	
 	m->suiv = l;
 
 	return m;
 }
 
-/*Liste insererEnFin(Liste l, int *periode, int n)
-{
-	maillon *m,*a;
-	int i;
+/* -------------------------------------------------------------------- */
+/* InsererEnFin          Insére un maillon en fin de liste 	            */
+/*                                                             			*/
+/* En entrée: l est la liste chaînée où la fonction ajoute un maillon  	*/
+/*			  u représente l'usine qui sera ajouté dans le maillon 		*/
+/*																		*/
+/* En sortie: la liste chaînée l avec un maillon supplémentaire			*/
+/* -------------------------------------------------------------------- */
 
-	
-	m = (maillon *)malloc(sizeof(maillon));
+liste_t InsererEnFin(liste_t l, usine_t u)
+{
+	maillon_t * m,* a;
+
+	m = (maillon_t *)malloc(sizeof(maillon_t));
 	if(m == NULL)
 	{
-		printf("Probleme d'allocation\n");
+		printf("Erreur : Probleme d'allocation\n");
 		exit(2);
 	}
-
-	m->periode = (int *)malloc(sizeof(int)*n);
-	if(m->periode == NULL)
-	{
-		printf("Probleme d'allocation\n");
-		exit(2);
-	}
-
-	m->suiv = nouvelleListe();
-	for(i=0;i<n;i++)
-	{
-		m->periode[i] = periode[i];	
-	}
-
+	m->suiv = NouvelleListe();
+	m->u.periode = u.periode;
+	m->u.coutProd = u.coutProd;
+	m->u.numero = u.numero;
 	if(l != NULL)
 	{
-
 		a=l;
-
 		while(a->suiv != NULL)
 		{
 			a = a->suiv;
 		}
 
 		a->suiv = m;
-
 	}
 	else
 	{
 		l = m;
 	}
-		
 	return l;
-}*/
+}
 
+/* -------------------------------------------------------------------- */
+/* NouvelleListe          Renvoie NULL pour faire une nouvelle liste    */
+/*                                                             			*/
+/* En entrée:														    */
+/*																		*/
+/* En sortie: retourne NULL 											*/
+/* -------------------------------------------------------------------- */
 
-Liste nouvelleListe(void)
+liste_t NouvelleListe(void)
 {
 	return NULL;
 }
 
-void libererListe(Liste l)
+/* -------------------------------------------------------------------- */
+/* LibererListe        Libére la mémoire occupé par la liste chaînée    */
+/*                                                             			*/
+/* En entrée: l est la liste chaînée à libérer						    */
+/*																		*/
+/* En sortie:															*/
+/* -------------------------------------------------------------------- */
+
+void LibererListe(liste_t l)
 {
-	maillon *m;
+	maillon_t * m;
+
 	while(l!=NULL)
 	{
 		m = l;
+		LibererElt(m);
 		l = l->suiv;
-		libererElt(m);
 	}
 }
 
-void libererElt(maillon *m)
+/* ------------------------------------------------------------------------------ */
+/* LibererElt        Libére la mémoire occupé d'un maillon de la liste chaînée    */
+/*                                                             					  */
+/* En entrée: m est le maillon à libérer						    		  	  */
+/*																				  */
+/* En sortie:																	  */
+/* ------------------------------------------------------------------------------ */
+
+void LibererElt(maillon_t * m)
 {
 	free(m);
 }
 
-Liste supprPremierElt(Liste l)
+/* -------------------------------------------------------------------- */
+/* SupprPremierElt        Supprime le premier maillon de la liste       */
+/*                                                             			*/
+/* En entrée: l est la liste chaînée						    		*/
+/*																		*/
+/* En sortie: la liste chaînée avec le premier maillon supprimé 	    */
+/* -------------------------------------------------------------------- */
+
+liste_t SupprPremierElt(liste_t l)
 {
-	maillon *m;
+	maillon_t * m;
 
-	m=l;
-	l=l->suiv;
-	libererElt(m);
-
+	if (l != NULL)
+	{
+		m=l;
+		l=l->suiv;
+		LibererElt(m);
+	}
+	else
+	{
+		l = NULL;
+	}
 	return l;
 }
 
-Liste supprElt(maillon *prec, maillon *suppr)
+/* ----------------------------------------------------------------------------------- */
+/* SupprElt        Supprime un élément de la liste chaînée    						   */
+/*                                                             						   */
+/* En entrée: prec est le pointeur sur le maillon précédent à celui qu'on supprimera   */
+/*			  suppr est le pointeur sur le maillon à supprimer 						   */
+/*																					   */
+/* En sortie: renvoie le pointeur prec												   */
+/* ----------------------------------------------------------------------------------- */
+
+liste_t SupprElt(maillon_t * prec, maillon_t *suppr)
 {
 	prec->suiv = suppr->suiv;
-	libererElt(suppr);
+	LibererElt(suppr);
 
 	return prec;
 }
 
-void afficherListe(Liste l)
-{
-	int i;
+/* -------------------------------------------------------------------- */
+/* AfficherListe        	  Afficher la liste chaînée			   	    */
+/*                                                             			*/
+/* En entrée: l est la liste chaînée à afficher					    	*/
+/*																		*/
+/* En sortie:															*/
+/* -------------------------------------------------------------------- */
 
-	while(l!=NULL)
+void AfficherListe(liste_t l)
+{	
+	if(l == NULL)
 	{
-		printf("%d ", l->periode);
-		printf("\n");
-		l=l->suiv;
+		printf("Liste vide !\n");
 	}
+	else
+	{
+		printf("----------------------------------------\n");
+		printf("| Usine | periode | cout de production |\n");
+		printf("|--------------------------------------|\n");
+	
+		while(l!=NULL)
+		{
+			printf("|   %d\t|    %d\t  |\t    %d\t       |\n",l->u.numero, l->u.periode, l->u.coutProd);
+			if(l->suiv==NULL) printf("----------------------------------------\n");	
+			else printf("|--------------------------------------|\n");
+			l=l->suiv;
+		}
+	}
+	
 }

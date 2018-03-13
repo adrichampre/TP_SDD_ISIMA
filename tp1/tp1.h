@@ -1,30 +1,20 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
+/* -------------------------------------------------------------------- */
+/* 		           		Fichier d'entête du tp1		                    */
+/*                                                                      */
+/* -------------------------------------------------------------------- */
 
 
-typedef struct usine
-{
-	int periode;
-	int ctp;
-	int num;
-}Usine;
+#include "liste.h"
 
-typedef struct maillon
-{
-	int periode;
-	int usine;
-	struct maillon * suiv;
-}maillon, *Liste;
+/* ---------------------------------------------------------- */
+/*							Prototypes 					      */
+/* ---------------------------------------------------------- */
 
-
-
-void global(char argv[],int k);
-int ** chargement(char nomFichier[], int * m, int * n);
-void afficherMatrice(int ** mat, int m, int n);
-void libererMatrice(int **mat, int m);
-Liste convertirMatrice(int **mat, int m, int n, int k);
-Liste supprUsine(Liste l, int u, int m);
-void sauvegarde(char *nomFichier, Liste l);
-int minimumTab(int **mat, int m, int n, int min, int *usine);
-
+void TriTab(usine_t * tab, int ** mat, int m, int n); 
+int ** Chargement(char nomFichier[], int * m, int * n);
+void AfficherMatrice(int ** mat, int m, int n);
+void LibererMatrice(int ** mat, int m);
+liste_t ConvertirMatrice(int ** mat, int m, int n, int k);
+liste_t SupprUsine(liste_t l, int u);
+void Sauvegarde(char * nomFichier, liste_t l);
+void Global(char argv[], int * k);
