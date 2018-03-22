@@ -18,28 +18,30 @@ pile_t * InitPile(int n)
 	if(p->val == NULL)
 	{
 		printf("Probléme d'allocation pour le tableau des valeurs !\n");
+		free(p);
+		p=NULL;
 		exit(1);
 	}
 
 	return p;
 }
 
-int Pleine(pile_t * p)
+int Pleine_Pile(pile_t * p)
 {
 	return (p->taille == p->nb_elt);
 }
 
-int Vide(pile_t * p)
+int Vide_Pile(pile_t * p)
 {
-	return (p->nb_elt == -1);
+	return (p->nb_elt == 0);
 }
 
 
 int Empiler(pile_t * p, elt_t val)
 {
-	int res=0;
+	int erreur=1;
 
-	if(!Pleine(p))
+	if(!Pleine_Pile(p))
 	{
 		p->nb_elt++;
 		p->val[p->nb_elt] = val;
@@ -47,16 +49,16 @@ int Empiler(pile_t * p, elt_t val)
 	else
 	{
 		printf("\nLa pile est pleine !\n");
-		res = 1;
+		erreur = 0;
 	}
 
-	return res;
+	return erreur;
 }
 
 int Depiler(pile_t * p, elt_t * val)
 {
-	int erreur = 0;
-	if(!Vide(p))
+	int erreur = 1;
+	if(!Vide_Pile(p))
 	{
 		* val = p->val[p->taille - p->nb_elt];
 		p->nb_elt--;
@@ -64,15 +66,24 @@ int Depiler(pile_t * p, elt_t * val)
 	else
 	{
 		printf("\nLa pile est vide !\n");
-		erreur = 1;
+		erreur = 0;
 	}
 
 	return erreur;
 }
 
+void LiberePile(pile_t * p)
+{
+	if(p != NULL)
+	{
+		free(p->val);
+		free(p);
+	}
+}
+
 void AfficherPile(pile_t * p)
 {
-	for (int i = p->nb_elt; i < p->taille; ++i)
+	for (int i = p->nb_elt; i > 0; --i)
 	{
 		printf("%d\n", p->val[i]);
 	}
