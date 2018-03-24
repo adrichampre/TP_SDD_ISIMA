@@ -1,8 +1,24 @@
+/* -------------------------------------------------------------------- */
+/* 						Fichier d'entête file    						*/
+/*                                                             			*/
+/* Contient les prototypes des fonctions de traitement d'une file		*/
+/* et la structure qui définit une file et le type d'élément de la file	*/
+/*																		*/
+/* -------------------------------------------------------------------- */
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
+/* ------------------------------------ */
+/* 		Type d'élément de la file   	*/
+/* ------------------------------------ */
+
 typedef int elmt_t;
+
+/* ------------------------------------ */
+/* 			Structure de la file   		*/
+/* ------------------------------------ */
 
 typedef struct file_t
 {
@@ -13,6 +29,9 @@ typedef struct file_t
 	elmt_t * base;
 }file_t;
 
+/* -------------------------------- */
+/* 			Prototypes   			*/
+/* -------------------------------- */
 
 file_t * InitFile(int n);
 int Vide_File(file_t * file);
