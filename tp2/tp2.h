@@ -1,6 +1,12 @@
+/* -------------------------------------------------------------------- */
+/* 						Fichier d'entête tp2    						*/
+/*                                                             			*/
+/* -------------------------------------------------------------------- */
+
+
 #include "pile.h"
 #include "file.h"
 
 
 
-void Global(void);
+int InverseEntierPile(pile_t * pile, file_t * file);

@@ -1,39 +1,40 @@
+/* -------------------------------------------------------------------- */
+/*            Fichier contenant la fonction pour inverser 				*/
+/*						les entiers d'une pile                   		*/
+/*                                                                      */
+/* -------------------------------------------------------------------- */
+
 #include "tp2.h"
 
 
-void Global(void)//Regarder cours pour inversion des entiers, tests à faire avec code erreur
+int InverseEntierPile(pile_t * pile, file_t * file)
 {
-	pile_t * pile;
-	file_t * file;
 	elt_t e;
-	int j;
-
-	pile = InitPile(5);
-	file = InitFile(5);
-	Empiler(pile, 4);
-	Empiler(pile, 2);
-	Empiler(pile, 79);
+	int j, err;
 
 	j = pile->nb_elt;
 	for (int i = 0; i < j; ++i)
 	{
-		Depiler(pile, &e);
-		printf("%d\n", e);
-		Enfiler(file, e);
+			err = Depiler(pile, &e);
+			if(err == 1)
+			{
+				err = Enfiler(file, e);
+			}
 	}
-	AfficherFile(file);
-	printf("\n");
-	j=file->nb_elmt;
-
-	for (int i = 0; i < j; ++i)
+	if(err == 1)
 	{
-		Defiler(file, &e);
-		printf("%d\n", e);
-		Empiler(pile, e);
+		j=file->nb_elmt;
+		for (int i = 0; i < j; ++i)
+		{
+			if(err == 1)
+			{
+				err = Defiler(file, &e);
+				if(err == 1)
+				{
+					err = Empiler(pile, e);
+				}
+			}
+		}
 	}
-	printf("\n");
-	AfficherPile(pile);
-
-	LibererFile(file);
-	LibererPile(pile);
+	return err;
 }

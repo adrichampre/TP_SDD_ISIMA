@@ -31,6 +31,7 @@ file_t * InitFile(int n)
 	if(file->base == NULL)
 	{
 		printf("\nProbléme d'allocation avec la file !\n");
+		free(file);
 		exit(1);
 	}
 	file->tete = file->base;
@@ -120,6 +121,7 @@ int Defiler(file_t * file, elmt_t * e)
 	}
 	else
 	{
+		printf("La file est vide !\n");
 		erreur = 0;
 	}
 
@@ -154,8 +156,8 @@ void LibererFile(file_t * file)
 
 void AfficherFile(file_t * file)
 {
-	printf("\n");
-	if(file->nb_elmt == 0)
+	printf("\nFile :\n");
+	if(Vide_File(file))
 	{
 		printf("File vide !\n");
 	}

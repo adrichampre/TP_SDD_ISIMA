@@ -31,7 +31,6 @@ pile_t * InitPile(int n)
 	{
 		printf("Probléme d'allocation pour le tableau des valeurs !\n");
 		free(p);
-		p=NULL;
 		exit(1);
 	}
 
@@ -136,7 +135,10 @@ void LibererPile(pile_t * p)
 {
 	if(p != NULL)
 	{
-		free(p->val);
+		if(p->val != NULL)
+		{
+			free(p->val);
+		}
 		free(p);
 	}
 }
@@ -150,6 +152,7 @@ void LibererPile(pile_t * p)
 
 void AfficherPile(pile_t * p)
 {
+	printf("\nPile : \n");
 	for (int i = p->nb_elt; i > 0; --i)
 	{
 		printf("%d\n", p->val[i]);
