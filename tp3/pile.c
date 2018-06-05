@@ -80,6 +80,8 @@ int Vide_Pile(pile_t * p)
 int Empiler(pile_t * p, elt_t val)
 {
 	int erreur=1;
+	
+	
 
 	if(!Pleine_Pile(p))
 	{

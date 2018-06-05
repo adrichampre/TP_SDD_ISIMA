@@ -13,13 +13,14 @@ typedef struct noeud
 	struct noeud *vertical;
 	struct noeud *horizontal;
 
-}Noeud, *Arbre;
+}Noeud;
 
 
-Arbre initArbre();
-Arbre insertionVertical(Arbre a, char c);
-Arbre insertionHorizontal(Arbre a, char c);
-Arbre lireChaine(Arbre a, char *c);
-void chargement(char *ligne, FILE *f);	
+Noeud * initNoeud();
+Noeud * insertionVertical(Noeud *a, char c);
+Noeud * insertionHorizontal(Noeud *a ,char c);
+Noeud * creerArbre(char *c);
+int chargement(char *ligne, char *nomFichier);
+void LibererArbre(Noeud *a, int nbExp);
 
 #endif

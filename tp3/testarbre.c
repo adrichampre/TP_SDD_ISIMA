@@ -2,8 +2,13 @@
 
 int main()
 {
-	Arbre a;
-	a=initArbre();
-	lireChaine(a,"(a(b,c))");
-	return 0;
+	Noeud *a=NULL;
+	char ligne[50];
+	int Error=0;
+	Error = chargement(ligne,"text.txt");
+
+	a=creerArbre(ligne);
+	LibererArbre(a,strlen(ligne));
+	
+	return Error;
 }
