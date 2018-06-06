@@ -2,11 +2,14 @@ CC = gcc
 CFLAGS = -W -Wall -pedantic -g
 LDFLAGS = -lm
 
-OBJ = testarbre.o arbre.o pile.o 
+OBJ = testarbre.o arbre.o pile.o file.o
 
 prog : $(OBJ)
 	$(CC) $(OBJ) $(LDFLAGS) -o prog
-	
+
+file.o : file.h file.c noeud.h
+	$(CC) -c file.c $(CFLAGS)
+
 pile.o : pile.h pile.c noeud.h
 	$(CC) -c pile.c $(CFLAGS)
 	
