@@ -1,3 +1,12 @@
+/* -------------------------------------------------------------------- */
+/* 						Fichier d'entête arbre    						*/
+/*                                                             			*/
+/* Contient les prototypes des fonctions de traitement des arbres.		*/
+/* Egalement nous avons la structure qui définit un noeud d'arbre.		*/
+/*																		*/
+/* -------------------------------------------------------------------- */
+
+
 #include "noeud.h"
 #include "pile.h"
 #include "file.h"
@@ -6,6 +15,9 @@
 #ifndef ARBRE
 #define ARBRE
 
+/* ------------------------------------ */
+/* 			Structure d'un noeud   		*/
+/* ------------------------------------ */
 typedef struct noeud
 {
 	char c;
@@ -14,7 +26,9 @@ typedef struct noeud
 
 }Noeud_t;
 
-
+/* -------------------------------- */
+/* 			Prototypes   			*/
+/* -------------------------------- */
 Noeud_t * initNoeud();
 Noeud_t * insertionVertical(Noeud_t *a, char c);
 Noeud_t * insertionHorizontal(Noeud_t *a ,char c);

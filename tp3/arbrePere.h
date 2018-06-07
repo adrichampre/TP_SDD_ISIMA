@@ -1,8 +1,21 @@
+/* -------------------------------------------------------------------- */
+/* 						Fichier d'entête arbrePere    					*/
+/*                                                             			*/
+/* Contient les prototypes des fonctions de traitement des arbres dont	*/
+/* les noeuds contiennent un lien vers le pere. Egalement nous avons la */
+/* structure qui définit un noeud d'arbre pere							*/
+/*																		*/
+/* -------------------------------------------------------------------- */
+
 #ifndef ARBRE_PERE
 #define ARBRE_PERE
 
 #include "arbre.h"
 
+
+/* ------------------------------------ */
+/* 			Structure d'un noeud   		*/
+/* ------------------------------------ */
 typedef struct arbrePere
 {
 	char c;
@@ -11,8 +24,12 @@ typedef struct arbrePere
 	struct arbrePere * pere;
 }ArbrePere_t;
 
-void initArbrePere(ArbrePere_t ** arbre, ArbrePere_t * prec, char c);
-void copieArbre(Noeud_t * arbre, ArbrePere_t ** arbrePere, int nbExp);
+/* -------------------------------- */
+/* 			Prototypes   			*/
+/* -------------------------------- */
+
+void InitArbrePere(ArbrePere_t ** arbre, ArbrePere_t * prec, char c);
+void CopieArbre(Noeud_t * arbre, ArbrePere_t ** arbrePere, int nbExp);
 void AffichageArbrePere(ArbrePere_t * arbre);
 void LibererArbrePere(ArbrePere_t ** arbre);
 

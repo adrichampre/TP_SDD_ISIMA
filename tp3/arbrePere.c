@@ -1,7 +1,20 @@
+/* -------------------------------------------------------------------- */
+/*            Fichier contenant les fonctions de l'arbre pere           */
+/*                                                                      */
+/* -------------------------------------------------------------------- */
+
 #include "arbrePere.h"
 
-
-void initArbrePere(ArbrePere_t ** arbre, ArbrePere_t * prec, char c)
+/* ------------------------------------------------------------------------ */
+/* InitArbrePere          Initialise un arbre pere 		                    */
+/*                                                                      	*/
+/* En entrée: arbre pointeur de pointeur sur l'arbre créé                  	*/
+/*			  prec pointeur sur le noeud précédent le nouveau à créer		*/
+/*			  c caractére à insérer dans le nouveau noeud 					*/
+/*                                                                      	*/
+/* En sortie: arbre 														*/
+/* ------------------------------------------------------------------------ */
+void InitArbrePere(ArbrePere_t ** arbre, ArbrePere_t * prec, char c)
 {
 	(*arbre) = (ArbrePere_t *)malloc(sizeof(ArbrePere_t));
 	if(*arbre != NULL)
@@ -17,7 +30,7 @@ void initArbrePere(ArbrePere_t ** arbre, ArbrePere_t * prec, char c)
 	}
 }
 
-void copieArbre(Noeud_t * arbre, ArbrePere_t ** arbrePere, int nbExp)
+void CopieArbre(Noeud_t * arbre, ArbrePere_t ** arbrePere, int nbExp)
 {
 	elt_t eltPile;
 	pile_t * p;
@@ -30,7 +43,7 @@ void copieArbre(Noeud_t * arbre, ArbrePere_t ** arbrePere, int nbExp)
 	while(eltPile.adr != NULL)
 	{
 
-		initArbrePere(precArbre, prec, (eltPile.adr)->c);
+		InitArbrePere(precArbre, prec, (eltPile.adr)->c);
 		cour = *precArbre;
 		if((eltPile.adr)->vertical != NULL)
 		{

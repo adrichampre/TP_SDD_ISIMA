@@ -13,7 +13,7 @@ int main()
 	a=creerArbre(ligne);
 	InsertionFils(a,'a','q',nbExp);
 	AffichagePostFixe(a,nbExp);
-	copieArbre(a,&arbre,nbExp);
+	CopieArbre(a,&arbre,nbExp);
 	AffichageArbrePere(arbre);
 	LibererArbrePere(&arbre);
 	LibererArbre(a,strlen(ligne));
