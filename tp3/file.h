@@ -5,10 +5,6 @@
 /* et la structure qui définit une file et le type d'élément de la file	*/
 /*																		*/
 /* -------------------------------------------------------------------- */
-
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
 #include "noeud.h"
 
 /* ------------------------------------ */

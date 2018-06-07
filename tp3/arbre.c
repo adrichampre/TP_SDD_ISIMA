@@ -1,30 +1,10 @@
 #include "arbre.h"
 
-int chargement(char *ligne, char *nomFichier)
+Noeud_t * initNoeud()
 {
-	FILE *f;
-	int Error=0;
-	
-	f=fopen(nomFichier,"r");
-	if(!f)
-	{
-		printf("Problé d'ouverture de fichier !\n");
-		Error = 2;
-	}
-	else
-	{
-		fgets(ligne, 50, f);
-		fclose(f);
-	}
-	
-	return Error;
-}
-
-Noeud * initNoeud()
-{
-		Noeud *n;
+		Noeud_t *n;
 		
-		n=(Noeud *)malloc(sizeof(Noeud));
+		n=(Noeud_t *)malloc(sizeof(Noeud_t));
 		if(n!=NULL)
 		{
 			n->vertical=NULL;
@@ -37,9 +17,9 @@ Noeud * initNoeud()
 		return n;
 }
 
-Noeud * insertionVertical(Noeud *a, char c)
+Noeud_t * insertionVertical(Noeud_t *a, char c)
 {
-	Noeud *n=NULL;
+	Noeud_t *n=NULL;
 	
 	n=initNoeud();
 	n->c=c;
@@ -55,9 +35,9 @@ Noeud * insertionVertical(Noeud *a, char c)
 	return n;
 }
 
-Noeud * insertionHorizontal(Noeud *a ,char c)
+Noeud_t * insertionHorizontal(Noeud_t *a ,char c)
 {
-	Noeud *n=NULL;
+	Noeud_t *n=NULL;
 	
 	n=initNoeud();
 	n->c=c;
@@ -74,12 +54,12 @@ Noeud * insertionHorizontal(Noeud *a ,char c)
 }
 
 
-Noeud * creerArbre(char *c)
+Noeud_t * creerArbre(char *c)
 {
 	int i=0;
 	pile_t *p;
 	elt_t elt_p;
-	Noeud *a=NULL;
+	Noeud_t *a=NULL;
 
 	p=InitPile(strlen(c));
 
@@ -118,7 +98,7 @@ Noeud * creerArbre(char *c)
 	return a;
 }
 
-void AffichagePostFixe(Noeud *a, int nbExp)
+void AffichagePostFixe(Noeud_t *a, int nbExp)
 {
 	elt_t cour,prec;
 	pile_t *p;
@@ -179,9 +159,9 @@ void AffichagePostFixe(Noeud *a, int nbExp)
 }
 
 
-int rechercher(Noeud *a, Noeud ** noeud, char c, int nbExp)
+int rechercher(Noeud_t *a, Noeud_t ** noeud, char c, int nbExp)
 {
-	Noeud * cour = a;	
+	Noeud_t * cour = a;	
 	file_t *f;
 	int erreur=1;
 
@@ -226,10 +206,10 @@ int rechercher(Noeud *a, Noeud ** noeud, char c, int nbExp)
 }
 
 
-void InsertionFils(Noeud *a, char r, char v, int nbExp)
+void InsertionFils(Noeud_t *a, char r, char v, int nbExp)
 {
-	Noeud *cour,*prec;
-	Noeud **noeud;
+	Noeud_t *cour,*prec;
+	Noeud_t **noeud;
 
 	if(rechercher(a,&cour,r,nbExp))
 	{
@@ -257,10 +237,10 @@ void InsertionFils(Noeud *a, char r, char v, int nbExp)
 }
 
 
-void LibererArbre(Noeud *a, int nbExp)
+void LibererArbre(Noeud_t *a, int nbExp)
 {
 	elt_t cour;
-	Noeud *n;
+	Noeud_t *n;
 	pile_t *p;
 	
 	p=InitPile(nbExp);

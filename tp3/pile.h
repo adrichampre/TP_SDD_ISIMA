@@ -6,10 +6,7 @@
 /*																		*/
 /* -------------------------------------------------------------------- */
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include "../tp3/noeud.h"
+#include "noeud.h"
 
 #ifndef PILE
 #define PILE

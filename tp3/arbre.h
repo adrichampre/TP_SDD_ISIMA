@@ -1,6 +1,3 @@
-#include <stdio.h>
-#include <string.h>
-#include <stdlib.h>
 #include "noeud.h"
 #include "pile.h"
 #include "file.h"
@@ -15,17 +12,16 @@ typedef struct noeud
 	struct noeud *vertical;
 	struct noeud *horizontal;
 
-}Noeud;
+}Noeud_t;
 
 
-Noeud * initNoeud();
-Noeud * insertionVertical(Noeud *a, char c);
-Noeud * insertionHorizontal(Noeud *a ,char c);
-Noeud * creerArbre(char *c);
-int chargement(char *ligne, char *nomFichier);
-void LibererArbre(Noeud *a, int nbExp);
-void AffichagePostFixe(Noeud *a, int nbExp);
-int rechercher(Noeud *a, Noeud ** noeud, char c, int nbExp);
-void InsertionFils(Noeud *a, char r, char v, int nbExp);
+Noeud_t * initNoeud();
+Noeud_t * insertionVertical(Noeud_t *a, char c);
+Noeud_t * insertionHorizontal(Noeud_t *a ,char c);
+Noeud_t * creerArbre(char *c);
+void LibererArbre(Noeud_t *a, int nbExp);
+void AffichagePostFixe(Noeud_t *a, int nbExp);
+int rechercher(Noeud_t *a, Noeud_t ** noeud, char c, int nbExp);
+void InsertionFils(Noeud_t *a, char r, char v, int nbExp);
 
 #endif
