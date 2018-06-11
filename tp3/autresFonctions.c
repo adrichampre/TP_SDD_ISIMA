@@ -1,6 +1,14 @@
 #include "autresFonctions.h"
 
-int chargement(char *ligne, char *nomFichier)
+/* ------------------------------------------------------------------------------------ */
+/* Chargement          			Charge le fichier 		                    			*/
+/*                                                                      				*/
+/* En entrée: nomFichier chaîne de caractéres correspondant au chemin du fichier		*/
+/*                                                                      				*/
+/* En sortie: ligne chaîne de caractéres à renvoyer 									*/
+/* ------------------------------------------------------------------------------------ */
+
+int Chargement(char *ligne, char *nomFichier)
 {
 	FILE *f;
 	int Error=0;

@@ -8,15 +8,19 @@ int main()
 	char ligne[50];
 	int Error=0,nbExp;
 	
-	Error = chargement(ligne,"text.txt");
-	nbExp = strlen(ligne);
-	a=creerArbre(ligne);
-	InsertionFils(a,'a','q',nbExp);
-	AffichagePostFixe(a,nbExp);
-	CopieArbre(a,&arbre,nbExp);
-	AffichageArbrePere(arbre);
-	LibererArbrePere(&arbre);
-	LibererArbre(a,strlen(ligne));
+	Error = Chargement(ligne,"text.txt");
+	if(Error==0)
+	{
+		nbExp = strlen(ligne);
+		a=CreerArbre(ligne);
+		InsertionFils(a,'a','q',nbExp);
+		AffichagePostFixe(a,nbExp);
+		CopieArbre(a,&arbre,nbExp);
+		AffichageArbrePere(arbre);
+		LibererArbrePere(&arbre);
+		LibererArbre(a,strlen(ligne));
+	}
+	
 
 	return Error;
 }

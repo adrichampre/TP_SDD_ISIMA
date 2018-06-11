@@ -10,6 +10,6 @@
 
 #include "noeud.h"
 
-int chargement(char *ligne, char *nomFichier);
+int Chargement(char *ligne, char *nomFichier);
 
 #endif

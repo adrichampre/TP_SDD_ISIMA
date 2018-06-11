@@ -1,6 +1,19 @@
+/* -------------------------------------------------------------------- */
+/*            Fichier contenant les fonctions de l'arbre 	            */
+/*                                                                      */
+/* -------------------------------------------------------------------- */
+
 #include "arbre.h"
 
-Noeud_t * initNoeud()
+
+/* ------------------------------------------------------------------------ */
+/* InitNoeud   		       Initialise un noeud 		 	                    */
+/*                                                                      	*/
+/* En entrée: 											                  	*/
+/*                                                                      	*/
+/* En sortie: Nouveau noeud													*/
+/* ------------------------------------------------------------------------ */
+Noeud_t * InitNoeud()
 {
 		Noeud_t *n;
 		
@@ -17,11 +30,19 @@ Noeud_t * initNoeud()
 		return n;
 }
 
-Noeud_t * insertionVertical(Noeud_t *a, char c)
+/* ------------------------------------------------------------------------ */
+/* InsertionVertical          Insére un lien vertical 	                    */
+/*                                                                      	*/
+/* En entrée: a pointeur sur le noeud à ajouter un lien 					*/
+/*			  c caractére à insérer dans le nouveau noeud 					*/
+/*                                                                      	*/
+/* En sortie: adresse du nouveau noeud inséré								*/
+/* ------------------------------------------------------------------------ */
+Noeud_t * InsertionVertical(Noeud_t *a, char c)
 {
 	Noeud_t *n=NULL;
 	
-	n=initNoeud();
+	n=InitNoeud();
 	n->c=c;
 	if(a!=NULL)
 	{
@@ -35,11 +56,19 @@ Noeud_t * insertionVertical(Noeud_t *a, char c)
 	return n;
 }
 
-Noeud_t * insertionHorizontal(Noeud_t *a ,char c)
+/* ------------------------------------------------------------------------ */
+/* InsertionHorizontal          Insére un lien horizontal 	                */
+/*                                                                      	*/
+/* En entrée: a pointeur sur l'arbre 					                 	*/
+/*			  c caractére à insérer dans le nouveau noeud 					*/
+/*                                                                      	*/
+/* En sortie: adresse du nouveau noeud inséré								*/
+/* ------------------------------------------------------------------------ */
+Noeud_t * InsertionHorizontal(Noeud_t *a ,char c)
 {
 	Noeud_t *n=NULL;
 	
-	n=initNoeud();
+	n=InitNoeud();
 	n->c=c;
 	if(a!=NULL)
 	{
@@ -53,8 +82,14 @@ Noeud_t * insertionHorizontal(Noeud_t *a ,char c)
 	return n;
 }
 
-
-Noeud_t * creerArbre(char *c)
+/* ------------------------------------------------------------------------ */
+/* CreerArbre     Créer un arbre à partir d'une chaîne de caractéres   		*/
+/*                                                                      	*/
+/* En entrée: c chaîne de caractéres pour créer l'arbre 			 		*/
+/*                                                                      	*/
+/* En sortie: adresse du premier noeud de l'arbre							*/
+/* ------------------------------------------------------------------------ */
+Noeud_t * CreerArbre(char *c)
 {
 	int i=0;
 	pile_t *p;
@@ -69,7 +104,7 @@ Noeud_t * creerArbre(char *c)
 		{
 			case '(' :
 			{
-				a=insertionVertical(a, c[i+1]);
+				a=InsertionVertical(a, c[i+1]);
 				elt_p.adr = a;
 				Empiler(p, elt_p);
 				i++;
@@ -78,7 +113,7 @@ Noeud_t * creerArbre(char *c)
 			}	
 			case ',' :
 			{
-				a=insertionHorizontal(a, c[i+1]);
+				a=InsertionHorizontal(a, c[i+1]);
 				i++;
 				break;
 			}
@@ -89,7 +124,7 @@ Noeud_t * creerArbre(char *c)
 				break;
 			}
 			default : 
-				a=insertionHorizontal((p->val[p->nb_elt]).adr, c[i]);
+				a=InsertionHorizontal((p->val[p->nb_elt]).adr, c[i]);
 				break;	
 		}
 		i++;
@@ -98,6 +133,14 @@ Noeud_t * creerArbre(char *c)
 	return a;
 }
 
+/* ------------------------------------------------------------------------ */
+/* AffichagePostFixe     Affichage de l'arbre en postfixé 			   		*/
+/*                                                                      	*/
+/* En entrée: a pointeur sur le premier noeud de l'arbre 			 		*/
+/*			  nbEexp nombre de caractéres dans le fichier 					*/
+/*                                                                      	*/
+/* En sortie: 																*/
+/* ------------------------------------------------------------------------ */
 void AffichagePostFixe(Noeud_t *a, int nbExp)
 {
 	elt_t cour,prec;
@@ -158,8 +201,16 @@ void AffichagePostFixe(Noeud_t *a, int nbExp)
 	LibererPile(p);
 }
 
-
-int rechercher(Noeud_t *a, Noeud_t ** noeud, char c, int nbExp)
+/* ------------------------------------------------------------------------ */
+/* Rechercher     		Affichage de l'arbre en postfixé 			   		*/
+/*                                                                      	*/
+/* En entrée: a pointeur sur le premier noeud de l'arbre 			 		*/
+/*			  c caractére à rechercher dans l'arbre 						*/
+/*			  nbEexp nombre de caractéres dans le fichier 					*/
+/*                                                                      	*/
+/* En sortie: noeud pointeur de pointeur sur le noeud recherché				*/
+/* ------------------------------------------------------------------------ */
+int Rechercher(Noeud_t *a, Noeud_t ** noeud, char c, int nbExp)
 {
 	Noeud_t * cour = a;	
 	file_t *f;
@@ -205,13 +256,22 @@ int rechercher(Noeud_t *a, Noeud_t ** noeud, char c, int nbExp)
 	return erreur;
 }
 
-
+/* ------------------------------------------------------------------------ */
+/* InsertionFils     		Insertion d'un fils						   		*/
+/*                                                                      	*/
+/* En entrée: a pointeur sur le premier noeud de l'arbre 			 		*/
+/*			  r caractére à rechercher dans l'arbre 						*/
+/*			  v carcatére du nouveau noeud 									*/
+/*			  nbEexp nombre de caractéres dans le fichier 					*/
+/*                                                                      	*/
+/* En sortie: 																*/
+/* ------------------------------------------------------------------------ */
 void InsertionFils(Noeud_t *a, char r, char v, int nbExp)
 {
 	Noeud_t *cour,*prec;
 	Noeud_t **noeud;
 
-	if(rechercher(a,&cour,r,nbExp))
+	if(Rechercher(a,&cour,r,nbExp))
 	{
 		prec = cour;
 		noeud = &(cour->vertical);
@@ -224,7 +284,7 @@ void InsertionFils(Noeud_t *a, char r, char v, int nbExp)
 				cour = cour->horizontal;
 			}
 		}
-		*noeud = initNoeud();
+		*noeud = InitNoeud();
 		if(noeud != NULL)
 		{
 			(*noeud)->c = v;
@@ -236,7 +296,14 @@ void InsertionFils(Noeud_t *a, char r, char v, int nbExp)
 	}
 }
 
-
+/* ------------------------------------------------------------------------ */
+/* LibererArbre     		Libére la mémoire occupée par l'arbre	   		*/
+/*                                                                      	*/
+/* En entrée: a pointeur sur le premier noeud de l'arbre 			 		*/
+/*			  nbEexp nombre de caractéres dans le fichier 					*/
+/*                                                                      	*/
+/* En sortie: 																*/
+/* ------------------------------------------------------------------------ */
 void LibererArbre(Noeud_t *a, int nbExp)
 {
 	elt_t cour;

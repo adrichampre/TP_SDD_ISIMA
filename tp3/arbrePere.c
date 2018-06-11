@@ -30,6 +30,15 @@ void InitArbrePere(ArbrePere_t ** arbre, ArbrePere_t * prec, char c)
 	}
 }
 
+/* ------------------------------------------------------------------------ */
+/* CopieArbre          Copie un arbre simple en arbre pere                  */
+/*                                                                      	*/
+/* En entrée: arbre pointeur sur l'arbre à copier 		                  	*/
+/*			  arbrePere pointeur de pointeur sur le nouvel arbre			*/
+/*			  nbExp nombre de caracteres présent dans le fichier			*/
+/*                                                                      	*/
+/* En sortie: arbrePere 													*/
+/* ------------------------------------------------------------------------ */
 void CopieArbre(Noeud_t * arbre, ArbrePere_t ** arbrePere, int nbExp)
 {
 	elt_t eltPile;
@@ -85,6 +94,13 @@ void CopieArbre(Noeud_t * arbre, ArbrePere_t ** arbrePere, int nbExp)
 	LibererPile(p);
 }
 
+/* ------------------------------------------------------------------------ */
+/* AffichageArbrePere          Affichage de l'arbre en postfixé             */
+/*                                                                      	*/
+/* En entrée: arbre pointeur sur l'arbre pere 		                  		*/
+/*                                                                      	*/
+/* En sortie: 			 													*/
+/* ------------------------------------------------------------------------ */
 
 void AffichageArbrePere(ArbrePere_t * arbre)
 {
@@ -126,6 +142,13 @@ void AffichageArbrePere(ArbrePere_t * arbre)
 	}
 }
 
+/* ------------------------------------------------------------------------ */
+/* LibererArbrePere          Libére la mémoire occupée par l'arbre pere     */
+/*                                                                      	*/
+/* En entrée: arbre pointeur de pointeur sur l'arbre	                  	*/
+/*                                                                      	*/
+/* En sortie: 			 													*/
+/* ------------------------------------------------------------------------ */
 
 void LibererArbrePere(ArbrePere_t ** arbre)
 {
