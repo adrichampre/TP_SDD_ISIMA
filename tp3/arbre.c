@@ -86,10 +86,11 @@ Noeud_t * InsertionHorizontal(Noeud_t *a ,char c)
 /* CreerArbre     Créer un arbre à partir d'une chaîne de caractéres   		*/
 /*                                                                      	*/
 /* En entrée: c chaîne de caractéres pour créer l'arbre 			 		*/
+/*			  nbExp nombre de caractéres dans la chaîne						*/
 /*                                                                      	*/
 /* En sortie: adresse du premier noeud de l'arbre							*/
 /* ------------------------------------------------------------------------ */
-Noeud_t * CreerArbre(char *c)
+Noeud_t * CreerArbre(char *c, int nbExp)
 {
 	int i=0;
 	pile_t *p;
@@ -98,7 +99,7 @@ Noeud_t * CreerArbre(char *c)
 
 	p=InitPile(strlen(c));
 
-	while(c[i+1]!='\0')
+	while(i < nbExp)
 	{
 		switch(c[i])
 		{
@@ -108,7 +109,6 @@ Noeud_t * CreerArbre(char *c)
 				elt_p.adr = a;
 				Empiler(p, elt_p);
 				i++;
-				
 				break;
 			}	
 			case ',' :

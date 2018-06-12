@@ -32,7 +32,7 @@ typedef struct noeud
 Noeud_t * InitNoeud();
 Noeud_t * InsertionVertical(Noeud_t *a, char c);
 Noeud_t * InsertionHorizontal(Noeud_t *a ,char c);
-Noeud_t * CreerArbre(char *c);
+Noeud_t * CreerArbre(char *c, int nbExp);
 void LibererArbre(Noeud_t *a, int nbExp);
 void AffichagePostFixe(Noeud_t *a, int nbExp);
 int Rechercher(Noeud_t *a, Noeud_t ** noeud, char c, int nbExp);
