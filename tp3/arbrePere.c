@@ -45,8 +45,9 @@ void CopieArbre(Noeud_t * arbre, ArbrePere_t ** arbrePere, int nbExp)
 	pile_t * p;
 	ArbrePere_t *cour=(*arbrePere), *prec=NULL;
 	ArbrePere_t **precArbre = arbrePere;
-	eltPile.adr = arbre;
 
+
+	eltPile.adr = arbre;
 	p=InitPile(nbExp);
 
 	while(eltPile.adr != NULL)
@@ -105,7 +106,7 @@ void CopieArbre(Noeud_t * arbre, ArbrePere_t ** arbrePere, int nbExp)
 void AffichageArbrePere(ArbrePere_t * arbre)
 {
 	ArbrePere_t * cour = arbre;
-
+	printf("\nAffichage postfixé de l'arbre pere: \n");
 	while(cour != NULL)
 	{
 		if(cour->vertical != NULL)

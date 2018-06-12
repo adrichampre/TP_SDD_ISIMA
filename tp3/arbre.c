@@ -97,7 +97,7 @@ Noeud_t * CreerArbre(char *c, int nbExp)
 	elt_t elt_p;
 	Noeud_t *a=NULL;
 
-	p=InitPile(strlen(c));
+	p=InitPile(nbExp);
 
 	while(i < nbExp)
 	{
@@ -148,7 +148,7 @@ void AffichagePostFixe(Noeud_t *a, int nbExp)
 	
 	p=InitPile(nbExp);
 	cour.adr=a;
-
+	printf("\nAffichage post fixé de l'arbre : \n");
 	while(cour.adr!=NULL)
 	{
 		if((cour.adr)->vertical != NULL)
@@ -212,7 +212,7 @@ void AffichagePostFixe(Noeud_t *a, int nbExp)
 /* ------------------------------------------------------------------------ */
 int Rechercher(Noeud_t *a, Noeud_t ** noeud, char c, int nbExp)
 {
-	Noeud_t * cour = a;	
+	Noeud_t * cour;	
 	file_t *f;
 	int erreur=1;
 

@@ -15,12 +15,13 @@ int main(int argc, char **argv)
 		a=CreerArbre(ligne,nbExp);
 		AffichagePostFixe(a,nbExp);
 
-		InsertionFils(a,'y','N',nbExp);
+		InsertionFils(a,'b','N',nbExp);
 		printf("\n");
 		AffichagePostFixe(a,nbExp);
-		/*CopieArbre(a,&arbre,nbExp);
+		CopieArbre(a,&arbre,nbExp);
+
 		AffichageArbrePere(arbre);
-		LibererArbrePere(&arbre);*/
+		LibererArbrePere(&arbre);
 		LibererArbre(a,strlen(ligne));
 	}
 
