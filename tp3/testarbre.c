@@ -13,9 +13,9 @@ int main(int argc, char **argv)
 	if(Error==0 && nbExp > 2)
 	{
 		a=CreerArbre(ligne,nbExp);
-		//AffichagePostFixe(a,nbExp);
+		AffichagePostFixe(a,nbExp);
 
-		//InsertionFils(a,'w','q',nbExp);
+		InsertionFils(a,'y','N',nbExp);
 		printf("\n");
 		AffichagePostFixe(a,nbExp);
 		/*CopieArbre(a,&arbre,nbExp);
@@ -23,7 +23,6 @@ int main(int argc, char **argv)
 		LibererArbrePere(&arbre);*/
 		LibererArbre(a,strlen(ligne));
 	}
-	
 
 	return Error;
 }

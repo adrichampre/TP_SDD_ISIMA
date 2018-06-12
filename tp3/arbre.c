@@ -250,6 +250,7 @@ int Rechercher(Noeud_t *a, Noeud_t ** noeud, char c, int nbExp)
 	{
 		*noeud = NULL;
 		erreur = 0;
+		printf("Le noeud n'a pas été trouvé\n");
 	}
 	LibererFile(f);
 
